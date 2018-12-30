@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Neat Select</title>
+		<style>
+			select {
+				padding: 5px 10px;
+			}
+		</style>
+		<link rel="stylesheet" href="neat-select.css" />
+	</head>
+	<body>
+		<table style="width: 90%; margin: auto;">
+			<tr>
+				<th width="10%"></th>
+				<th width="45%">Native</th>
+				<th width="45%">Neat</th>
+			</tr>
+			<tr>
+				<th>Single</th>
+				<td>
+					<select style="width:100%">
+						<option value="hello">Hello</option>
+						<option value="world">World</option>
+						<option value="foo">Foo</option>
+						<option value="bar" disabled>Bar</option>
+						<option value="baz">Baz</option>
+						<option value="bat">Bat</option>
+						<option value="long">A really really really really really really really really long one</option>
+						<option value="opt1">Opt1</option>
+						<option value="opt2">Opt2</option>
+						<option value="opt3">$Opt3</option>
+						<option value="100$">100$</option>
+						<option value="Opt5">"!@#$%^&*()+[]:&quot;/.,&lt;&gt;?;':~`</option>
+						<option value="opt6">Opt6</option>
+						<option value="opt7">Opt7</option>
+						<option value="opt8">Opt8</option>
+						<option value="opt9">Opt9</option>
+						<option value="opt10">Opt10</option>
+						<option value="opt11">Opt11</option>
+						<option value="opt12">Opt12</option>
+						<option value="opt13">Opt13</option>
+						<option value="opt14">Opt14</option>
+						<option value="opt15">Opt15</option>
+						<option value="opt16">Opt16</option>
+						<option value="opt17">Opt17</option>
+						<option value="opt18">Opt18</option>
+						<option value="opt19">Opt19</option>
+						<option value="opt20">Opt20</option>
+					</select>
+				</td>
+				<td>
+					<select class="neat" style="width:100%">
+						<option value="hello">Hello</option>
+						<option value="world">World</option>
+						<option value="foo">Foo</option>
+						<option value="bar" disabled>Bar</option>
+						<option value="baz">Baz</option>
+						<option value="bat">Bat</option>
+						<option value="long">A really really really really really really really really long one</option>
+						<option value="opt1">Opt1</option>
+						<option value="opt3">Opt2</option>
+						<option value="$opt4">$Opt3</option>
+						<option value="100$">100$</option>
+						<option value="Opt5">"!@#$%^&*()+[]:&quot;/.,&lt;&gt;?;':~`</option>
+						<option value="opt6">Opt6</option>
+						<option value="opt7">Opt7</option>
+						<option value="opt8">Opt8</option>
+						<option value="opt9">Opt9</option>
+						<option value="opt10">Opt10</option>
+						<option value="opt11">Opt11</option>
+						<option value="opt12">Opt12</option>
+						<option value="opt13">Opt13</option>
+						<option value="opt14">Opt14</option>
+						<option value="opt15">Opt15</option>
+						<option value="opt16">Opt16</option>
+						<option value="opt17">Opt17</option>
+						<option value="opt18">Opt18</option>
+						<option value="opt19">Opt19</option>
+						<option value="opt20">Opt20</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>Multiple</th>
+				<td>
+					<select style="width:100%" multiple>
+						<option value="hello">Hello</option>
+						<option value="world">World</option>
+						<option value="foo">Foo</option>
+						<option value="bar" disabled>Bar</option>
+						<option value="baz">Baz</option>
+						<option value="bat">Bat</option>
+						<option value="long">A really really really really really really really really long one</option>
+						<option value="opt1">Opt1</option>
+						<option value="opt2">Opt2</option>
+						<option value="opt3">$Opt3</option>
+						<option value="100$">100$</option>
+						<option value="Opt5">"!@#$%^&*()+[]:&quot;/.,&lt;&gt;?;':~`</option>
+						<option value="opt6">Opt6</option>
+						<option value="opt7">Opt7</option>
+						<option value="opt8">Opt8</option>
+						<option value="opt9">Opt9</option>
+						<option value="opt10">Opt10</option>
+						<option value="opt11">Opt11</option>
+						<option value="opt12">Opt12</option>
+						<option value="opt13">Opt13</option>
+						<option value="opt14">Opt14</option>
+						<option value="opt15">Opt15</option>
+						<option value="opt16">Opt16</option>
+						<option value="opt17">Opt17</option>
+						<option value="opt18">Opt18</option>
+						<option value="opt19">Opt19</option>
+						<option value="opt20">Opt20</option>
+					</select>
+				</td>
+				<td>
+					<select class="neat" style="width:100%" multiple>
+						<option value="hello">Hello</option>
+						<option value="world">World</option>
+						<option value="foo">Foo</option>
+						<option value="bar" disabled>Bar</option>
+						<option value="baz">Baz</option>
+						<option value="bat">Bat</option>
+						<option value="long">A really really really really really really really really long one</option>
+						<option value="opt1">Opt1</option>
+						<option value="opt2">Opt2</option>
+						<option value="opt3">$Opt3</option>
+						<option value="100$">100$</option>
+						<option value="Opt5">"!@#$%^&*()+[]:&quot;/.,&lt;&gt;?;':~`</option>
+						<option value="opt6">Opt6</option>
+						<option value="opt7">Opt7</option>
+						<option value="opt8">Opt8</option>
+						<option value="opt9">Opt9</option>
+						<option value="opt10">Opt10</option>
+						<option value="opt11">Opt11</option>
+						<option value="opt12">Opt12</option>
+						<option value="opt13">Opt13</option>
+						<option value="opt14">Opt14</option>
+						<option value="opt15">Opt15</option>
+						<option value="opt16">Opt16</option>
+						<option value="opt17">Opt17</option>
+						<option value="opt18">Opt18</option>
+						<option value="opt19">Opt19</option>
+						<option value="opt20">Opt20</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+		<script src="neat-select.js"></script>
+		<script>
+			(function() {
+				document.querySelectorAll('select.neat').forEach((select) => {
+					neatSelect({
+						selectElement: select,
+						search: true,
+					});
+				});
+			}());
+		</script>
+	</body>
+</html>

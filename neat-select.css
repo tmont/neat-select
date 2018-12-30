@@ -1,0 +1,120 @@
+[class^="neat-select"] {
+	box-sizing: border-box;
+}
+
+.neat-select {
+	border-radius: 4px;
+	border: 1px solid #999999;
+}
+.neat-select-single {
+	padding-right: 10px;
+	background-image: linear-gradient(to bottom, #ffffff, #e4e4e4);
+}
+.neat-select-single.neat-select-open {
+	border-bottom: none;
+	background-image: linear-gradient(to bottom, #e4e4e4, #ffffff 50%);
+}
+.neat-select-multiple {
+	cursor: text;
+}
+
+.neat-select-open {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.neat-select-caret {
+	position: absolute;
+	right: 5px;
+	color: #999999;
+	font-size: 75%;
+}
+
+.neat-select-value-container {
+	cursor: pointer;
+}
+
+.neat-select-search-input {
+	width: 100%;
+	padding: 4px 8px;
+	border-radius: 4px;
+	border: 1px solid #999999;
+}
+
+.neat-select-dropdown {
+	padding: 5px;
+	display: none;
+	position: absolute;
+	z-index: 1001;
+	left: -1px;
+	top: 100%;
+	border: 1px solid #999999;
+	border-top: none;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	background-color: white;
+	box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.25);
+}
+.neat-select-single .neat-select-dropdown {
+	margin-top: -1px;
+}
+
+.neat-select-multiple .neat-select-dropdown {
+	margin-top: 1px;
+}
+
+.neat-select-dropdown-item-container {
+	overflow: auto;
+	max-height: 200px;
+	margin-top: 4px;
+	position: relative;
+}
+
+.neat-select-dropdown-item {
+	cursor: pointer;
+	padding: 4px 8px;
+}
+
+.neat-select-active {
+	background-image: linear-gradient(to bottom, #5376b5, #435d90);
+	color: white;
+}
+
+.neat-select-dropdown-no-matches {
+	padding: 4px 8px;
+	color: #999999;
+	display: none;
+	overflow-wrap: break-word;
+}
+
+.neat-select-multiple-item {
+	float: left;
+	border: 1px solid #6a6e7b;
+	border-radius: 4px;
+	text-align: center;
+	margin: 2px;
+	background-image: linear-gradient(to bottom, #5376b5, #435d90);
+	position: relative;
+	padding: 2px 4px;
+	color: white;
+}
+
+.neat-select-item-delete {
+	margin-left: 6px;
+	display: inline;
+	cursor: pointer;
+}
+.neat-select-item-delete:hover {
+	text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+.neat-select-multiple-input {
+	border: none;
+	background-color: transparent;
+	float: left;
+	padding: 4px 8px 4px 4px;
+}
+.neat-select-disabled {
+	pointer-events: none;
+	color: #aaaaaa;
+}
