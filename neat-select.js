@@ -544,12 +544,4 @@
 			}
 		}
 	});
-
-	if (typeof(window.$) !== 'undefined' && typeof(window.$.fn) === 'object') {
-		window.$.fn.neatSelect = function() {
-			return this.each(function() {
-				neatSelect(this);
-			});
-		};
-	}
 }(window));
