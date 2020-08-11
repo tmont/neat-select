@@ -385,11 +385,11 @@
 			};
 
 			const turnOnKeyboardEvents = () => {
-				document.addEventListener('keypress', keypressListener);
+				document.addEventListener('keydown', keypressListener);
 			};
 
 			const turnOffKeyboardEvents = () => {
-				document.removeEventListener('keypress', keypressListener);
+				document.removeEventListener('keydown', keypressListener);
 			};
 
 			const dropdownContainer = el(`div.${clsPrefix}-dropdown`);
