@@ -55,6 +55,7 @@
 
 		const selectElement = options.selectElement;
 		const enableSearch = typeof(options.search) === 'boolean' ? options.search : true;
+		const onOptionAdded = typeof(options.onOptionAdded) === 'function' ? options.onOptionAdded : null;
 
 		const existingId = selectElement.getAttribute(neatAttrName);
 		if (existingId && neatMap[existingId]) {
@@ -73,6 +74,7 @@
 		let destroyNeatSelect;
 		let hideDropdown;
 		let showAndFilterDropdown;
+		let addOption;
 
 		const selectedValues = [];
 
@@ -141,8 +143,10 @@
 				const regex = new RegExp(`.*${regexEscape(filterValue)}.*`, 'i');
 
 				let numMatches = 0;
+				let hasExactMatch = false;
 				items.forEach((element) => {
 					const value = element.textContent;
+					hasExactMatch = hasExactMatch || value === filterValue;
 					if (regex.test(value)) {
 						element.style.display = 'block';
 						numMatches++;
@@ -151,9 +155,18 @@
 					}
 				});
 
+				updateAddOptionButton(filterValue, hasExactMatch);
+
 				if (!numMatches) {
 					noMatchesItem.style.display = 'block';
 					noMatchesItem.textContent = `Nothing matches ${filterValue}`;
+				}
+			};
+
+			const updateAddOptionButton = (filterValue, hasExactMatch) => {
+				const newOptionButton = find('new-option-button');
+				if (newOptionButton) {
+					newOptionButton.disabled = filterValue ? hasExactMatch : true;
 				}
 			};
 
@@ -171,6 +184,10 @@
 				activeItem = null;
 				turnOffKeyboardEvents();
 				unsetActiveItem();
+			};
+
+			addOption = (value, label, selected, disabled) => {
+				createNewOption(value, label, selected, disabled);
 			};
 
 			const setActiveItem = (node, navigationDir) => {
@@ -339,7 +356,7 @@
 				}
 			};
 
-			const keypressListener = (e) => {
+			const keyDownListener = (e) => {
 				if (!getContainerAncestor(e.target)) {
 					return;
 				}
@@ -385,11 +402,11 @@
 			};
 
 			const turnOnKeyboardEvents = () => {
-				document.addEventListener('keydown', keypressListener);
+				document.addEventListener('keydown', keyDownListener);
 			};
 
 			const turnOffKeyboardEvents = () => {
-				document.removeEventListener('keydown', keypressListener);
+				document.removeEventListener('keydown', keyDownListener);
 			};
 
 			const dropdownContainer = el(`div.${clsPrefix}-dropdown`);
@@ -407,7 +424,33 @@
 						showAndFilterDropdown(searchInput.value);
 					});
 
-					dropdownContainer.appendChild(searchInput);
+					const searchContainer = el(`div.${clsPrefix}-search-container`);
+					searchContainer.appendChild(searchInput);
+					dropdownContainer.appendChild(searchContainer);
+
+					if (onOptionAdded) {
+						searchInput.classList.add('addable-option');
+						const newOptionButton = el(`button.${clsPrefix}-new-option-button`, {
+							autocomplete: 'off',
+						});
+						newOptionButton.innerHTML = `<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`;
+						const btnLabel = el(`span`);
+						btnLabel.textContent = 'Add';
+						newOptionButton.appendChild(btnLabel);
+						newOptionButton.disabled = true;
+						newOptionButton.addEventListener('click', () => {
+							newOptionButton.classList.add(`${clsPrefix}-loading`);
+							onOptionAdded(searchInput.value)
+								.then((value, label) => {
+									addOption(value, label, true);
+								})
+								.catch(() => {})
+								.finally(() => {
+									newOptionButton.classList.remove(`${clsPrefix}-loading`);
+								});
+						});
+						searchContainer.appendChild(newOptionButton);
+					}
 				}
 
 				container.classList.add(`${clsPrefix}-single`);
@@ -467,22 +510,44 @@
 			dropdownContainer.appendChild(itemContainer);
 			container.appendChild(dropdownContainer);
 
-			selectElement.querySelectorAll('option').forEach((option) => {
-				const label = option.textContent;
-				const item = el(`div.${clsPrefix}-dropdown-item`, {
-					'data-value': option.value
+			const createNewOption = (value, label, selected, disabled) => {
+				const optionNode = el('option', {
+					value,
 				});
-				if (option.hasAttribute('disabled')) {
+
+				if (selected) {
+					optionNode.selected = true;
+				}
+				if (disabled) {
+					optionNode.disabled = true;
+				}
+
+				optionNode.appendChild(document.createTextNode(label || value));
+				selectElement.appendChild(optionNode);
+				createItemFromOption(optionNode);
+
+				updateAddOptionButton(value, true);
+			};
+
+			const createItemFromOption = (optionNode) => {
+				const item = el(`div.${clsPrefix}-dropdown-item`, {
+					'data-value': optionNode.value
+				});
+				if (optionNode.disabled) {
 					item.classList.add(`${clsPrefix}-disabled`);
 				}
-				item.textContent = label;
+				item.textContent = optionNode.textContent;
 				item.addEventListener('click', () => toggleItem(item));
 				item.addEventListener('mouseenter', () => setActiveItem(item));
 				itemContainer.appendChild(item);
 
-				if (option.selected) {
-					addSelectedValue(item, option);
+				if (optionNode.selected) {
+					addSelectedValue(item, optionNode);
 				}
+			};
+
+			selectElement.querySelectorAll('option').forEach((option) => {
+				createItemFromOption(option);
 			});
 
 			selectElement.style.display = 'none';
@@ -518,6 +583,9 @@
 			},
 			close() {
 				hideDropdown && hideDropdown();
+			},
+			addOption(value, text, selected, disabled) {
+				addOption && addOption(value, text, selected, disabled);
 			}
 		};
 		neatMap[id] = api;
