@@ -29,7 +29,11 @@
 		}
 		const [ nodeName ] = name.split('.', 1);
 		const node = document.createElement(nodeName);
-		node.className = name.substring(nodeName.length + 1).replace(/\./g, ' ');
+		const className = name.substring(nodeName.length + 1).replace(/\./g, ' ');
+		if (className) {
+			node.className = className;
+		}
+
 		Object.keys(attrs || {}).forEach((key) => {
 			if (key === 'style') {
 				Object.keys(attrs.style).forEach((prop) => {
